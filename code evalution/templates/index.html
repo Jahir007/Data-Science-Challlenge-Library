@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Code Evaluation</title>
+    <!-- Add the CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            padding-top: 30px;
+            color: #4285F4;
+            font-size: 36px;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 18px;
+            color: #555;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #4285F4;
+        }
+
+        input[type="submit"] {
+            background-color: #4285F4;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 18px;
+            transition: background-color 0.3s;
+            display: block;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3367D6;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+            color: #4285F4;
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            color: #555;
+        }
+
+        .error-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #8dcedd;
+            border: 1px solid #9a7373;
+            border-radius: 5px;
+            color: #f60000;
+            /* font-weight: bold; */
+            text-align: center;
+        }
+
+        /* Include the Open Sans and Source Code Pro font from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Source+Code+Pro:wght@400;700&display=swap');
+    </style>
+</head>
+<body>
+    <h1>Code Evaluation</h1>
+    <p>Write a Python script that trains a RandomForestClassifier on the Iris dataset and stores the predictions in a variable named <code>student_predictions</code> and the test labels in a variable named <code>student_y_test</code>.</p>
+    <!-- Add the CodeMirror text area -->
+    <form action="/" method="POST">
+        <label for="code-editor">Your Python Code:</label>
+        <textarea id="code-editor" name="code" rows="20" cols="70" style="border-color: #ccc;"></textarea><br>
+        <input type="submit" value="Submit Code">
+    </form>
+
+    {% if accuracy %}
+    <h2>Results:</h2>
+    <div class="result">Your model's accuracy is: {{ accuracy }}</div>
+    {% elif error %}
+    <div class="error-box">
+        <h2>An error occurred:</h2>
+        <p>{{ error }}</p>
+        <pre>{{ traceback }}</pre>
+    </div>
+    {% endif %}
+
+    <!-- Add the CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js"></script>
+    <!-- Set the Python mode for CodeMirror -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/python/python.min.js"></script>
+    <!-- Initialize the CodeMirror editor -->
+    <script>
+        var codeEditor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
+            mode: 'python',
+            theme: 'default',
+            indentUnit: 4,
+            lineNumbers: true,
+            matchBrackets: true,
+            lineWrapping: true // Wrap long lines for better visibility
+        });
+    </script>
+</body>
+</html>

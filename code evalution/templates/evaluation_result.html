@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Evaluation Result</title>
+</head>
+<body>
+    <h1>Evaluation Result for Problem: {{ problem.problem }}</h1>
+    <p><strong>User Name:</strong> {{ user_name }}</p>
+    <p><strong>Score:</strong> {{ score }}</p>
+    {% if error_message %}
+        <p><strong>Error Message:</strong> {{ error_message }}</p>
+    {% else %}
+        <p><strong>User Output:</strong></p>
+        <pre>{{ user_output }}</pre>
+    {% endif %}
+    <a href="{{ url_for('index') }}">Back to Problems List</a>
+</body>
+</html>

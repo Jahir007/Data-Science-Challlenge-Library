@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Problem Submission</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #4a148c;
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            color: #4a148c;
+            font-size: 18px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="submit"] {
+            background-color: #4a148c;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #6a1b9a;
+        }
+
+        /* Ace code editor styles */
+        #code-editor {
+            height: 300px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Include the Ace code editor library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <body>
+        <div class="container">
+            <h1>Problem Submission</h1>
+            <form method="POST" action="{{ url_for('code_evaluation') }}">
+                <label for="problem">Problem Statement</label>
+                <textarea id="problem" name="problem" required></textarea>
+                <label for="solution">Expected Code Solution</label>
+                <!-- Replace the textarea with the Ace code editor -->
+                <div id="code-editor"></div>
+                <!-- Hidden input to store the code written by the user -->
+                <input type="hidden" id="user-code" name="code" required>
+                <input type="submit" value="Submit">
+            </form>
+    
+            <h2>Submitted Problems:</h2>
+            <ul>
+            {% for problem in submission_problems %}
+                <li>{{ problem.problem }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+
+    <script>
+        // Initialize the Ace code editor
+        var editor = ace.edit("code-editor");
+        editor.setTheme("ace/theme/chrome");
+        editor.session.setMode("ace/mode/python");
+
+        // Update the hidden input with user's code when the form is submitted
+        document.querySelector('form').addEventListener('submit', function(event) {
+            var userCode = editor.getValue();
+            document.getElementById('user-code').value = userCode;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!-- evaluation.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Code Evaluation Result</title>
+</head>
+<body>
+    <h1>Code Evaluation Result</h1>
+    <p>Name: {{ name }}</p>
+    <p>Answer:</p>
+    <pre>{{ answer }}</pre>
+    <p>Result: {{ result }}</p>
+    {% if error_message %}
+    <p>Error: {{ error_message }}</p>
+    {% endif %}
+</body>
+</html>
